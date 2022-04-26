@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
+from contact import Contact
 
 class TestAddContact(unittest.TestCase):
     def setUp(self):
@@ -14,37 +15,37 @@ class TestAddContact(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
         self.open_page_add_new(wd)
-        self.create_contact(wd, firstname="Albina", lastname="Gurova", nickname="unimpr0vable", company="Liga",
-                            mobile="89638958605", email="albina.gurova@gmail.com")
+        self.create_contact(wd, Contact(firstname="Albina", lastname="Gurova", nickname="unimpr0vable", company="Liga",
+                                        mobile="89638958605", email="albina.gurova@gmail.com"))
         self.logout(wd)
 
-    def create_contact(self, wd, firstname, lastname, nickname, company, mobile, email):
+    def create_contact(self, wd, contact):
         # fill contact form
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(firstname)
+        wd.find_element_by_name("firstname").send_keys(contact.firstname)
         wd.find_element_by_name("theform").click()
         wd.find_element_by_name("middlename").click()
         wd.find_element_by_name("lastname").click()
         wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(lastname)
+        wd.find_element_by_name("lastname").send_keys(contact.lastname)
         wd.find_element_by_name("theform").click()
         wd.find_element_by_name("nickname").click()
         wd.find_element_by_name("nickname").clear()
-        wd.find_element_by_name("nickname").send_keys(nickname)
+        wd.find_element_by_name("nickname").send_keys(contact.nickname)
         wd.find_element_by_name("theform").click()
         wd.find_element_by_name("company").click()
         wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys(company)
+        wd.find_element_by_name("company").send_keys(contact.company)
         wd.find_element_by_name("theform").click()
         wd.find_element_by_name("home").click()
         wd.find_element_by_name("mobile").click()
         wd.find_element_by_name("mobile").clear()
-        wd.find_element_by_name("mobile").send_keys(mobile)
+        wd.find_element_by_name("mobile").send_keys(contact.mobile)
         wd.find_element_by_name("theform").click()
         wd.find_element_by_name("email").click()
         wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys(email)
+        wd.find_element_by_name("email").send_keys(contact.email)
         wd.find_element_by_name("theform").click()
         # submit contact creation
         wd.find_element_by_name("submit").click()
