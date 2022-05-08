@@ -11,6 +11,7 @@ class ContactHelper:
 
     def create(self, contact):
         wd = self.app.wd
+        self.open_contact_page()
         self.open_page_add_new()
         self.fill_contact_form(contact)
         # submit contact creation
@@ -23,7 +24,9 @@ class ContactHelper:
 
     def open_contact_page(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        if not (wd.current_url.endswith("addressbook/") and
+                len(wd.find_elements_by_xpath("//input[@value='Send e-Mail']")) > 0):
+            wd.find_element_by_link_text("home").click()
 
     def delete_first(self):
         wd = self.app.wd
