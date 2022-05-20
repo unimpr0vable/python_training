@@ -87,8 +87,8 @@ class ContactHelper:
             self.open_contact_page()
             self.contact_cache = []
             for element in wd.find_elements_by_xpath("//tbody/tr[@name='entry']"):
-                firstname = element.find_element_by_xpath("//td[3]").text
-                lastname = element.find_element_by_xpath("//td[2]").text
+                firstname = element.find_element_by_xpath(".//td[3]").text
+                lastname = element.find_element_by_xpath(".//td[2]").text
                 id = element.find_element_by_name("selected[]").get_attribute("value")
                 self.contact_cache.append(Contact(firstname = firstname, lastname = lastname, id = id))
         return list(self.contact_cache)
