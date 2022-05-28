@@ -4,11 +4,13 @@ from random import randrange
 def test_edit_some_contact(app):
     if app.contact.count() == 0:
         app.contact.create(Contact(firstname="test", lastname="test", nickname="test", company="test",
-                               mobile="12345", email="test@mail.ru"))
+                               mobile="12345", email="test@mail.ru", workphone= "12345", secondaryphone = "12345",
+                                homephone = "12345", address= "city street house", email2 = "test2@mail.ru",
+                                email3 = "test3@mail.ru"))
     old_contacts = app.contact.get_list()
     index = randrange(len(old_contacts))
-    contact = Contact(firstname="1", lastname="1", nickname="1", company="1",
-                               mobile="1", email="1")
+    contact = Contact(firstname="1", lastname="1", nickname="1", company="1", mobile="1", email="1", workphone= "1",
+                         secondaryphone = "1", homephone = "1", address= "1", email2 = "1", email3 = "1")
     contact.id = old_contacts[index].id
     app.contact.edit_by_index(index, contact)
     assert len(old_contacts) == app.contact.count()
