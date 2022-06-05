@@ -5,8 +5,9 @@ import pytest
 
 
 #@pytest.mark.parametrize("contact", testdata, ids=[repr(x) for x in testdata])
-def test_add_contact(app, data_contacts):
-    contact = data_contacts
+def test_add_contact(app, json_contacts):
+    #contact = data_contacts
+    contact = json_contacts
     old_contacts = app.contact.get_list()
     app.contact.create(contact)
     assert len(old_contacts) + 1 == app.contact.count()
