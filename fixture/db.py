@@ -27,7 +27,7 @@ class DbFixture:
         contact_list =[]
         cursor = self.connection.cursor()
         try:
-            cursor.execute("select id, firstname, lastname, nickname, company, address, home, mobile, work, phone2,email,"
+            cursor.execute("select id, firstname, lastname, nickname, company, address, home, mobile, work, phone2, email,"
                            "email2, email3 from addressbook where deprecated = '0000-00-00 00:00:00'")
             for row in cursor:
                 (id, firstname, lastname, nickname, company, address, home, mobile, work, phone2, email, email2, email3) = row
@@ -37,6 +37,7 @@ class DbFixture:
         finally:
             cursor.close()
         return contact_list
+
 
     def destroy(self):
         self.connection.close()
