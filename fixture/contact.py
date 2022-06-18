@@ -1,5 +1,7 @@
+import time
 from model.contact import Contact
 import re
+from selenium.webdriver.support.select import Select
 
 
 class ContactHelper:
@@ -169,5 +171,25 @@ class ContactHelper:
     def select_contact_by_id(self, id):
         wd = self.app.wd
         wd.find_element_by_xpath("//td/input[@id='%s']" % id).click()
+
+    def add_to_group(self, id, group_id):
+        wd = self.app.wd
+        self.open_contact_page()
+        self.select_contact_by_id(id)
+        wd.find_element_by_name("to_group").click()
+        select = Select(wd.find_element_by_name("to_group"))
+        select.select_by_value(('%s') % group_id)
+        wd.find_element_by_name("add").click()
+
+    def del_from_group(self, id, group_id):
+        wd = self.app.wd
+        self.open_contact_page()
+        wd.find_element_by_name("group").click()
+        select = Select(wd.find_element_by_name("group"))
+        select.select_by_value(('%s') % group_id)
+        self.select_contact_by_id(id)
+        wd.find_element_by_name("remove").click()
+
+
 
 
