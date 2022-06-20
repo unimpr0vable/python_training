@@ -12,12 +12,13 @@ def test_del_contact_from_group(app, orm):
         app.group.create(Group(name="test_name", header="test_header", footer="test_footer"))
 
     group = random.choice(orm.get_group_list())
-    contact = random.choice(orm.get_contact_list())
 
-    if contact not in orm.get_contacts_in_group(group):
+    #if this group have not contacts
+    if len(orm.get_contacts_in_group(group)) == 0:
+        contact = random.choice(orm.get_contact_list())
         app.contact.add_to_group(contact.id, group.id)
-    #if assert not work then precondition not work
-    assert contact in orm.get_contacts_in_group(group)
+
+    contact = random.choice(orm.get_contacts_in_group(group))
 
     app.contact.del_from_group(contact.id, group.id)
 

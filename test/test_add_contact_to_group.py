@@ -12,7 +12,7 @@ def test_add_contact_to_group(app, orm):
         app.group.create(Group(name="test_name", header="test_header", footer="test_footer"))
 
     group = random.choice(orm.get_group_list())
-    contact = random.choice(orm.get_contact_list())
+    contact = random.choice(orm.get_contacts_not_in_group(group))
 
     app.contact.add_to_group(contact.id, group.id)
     assert contact in orm.get_contacts_in_group(group)
