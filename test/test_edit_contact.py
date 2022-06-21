@@ -14,7 +14,7 @@ def test_edit_some_contact(app, db, check_ui):
     contact_vars = Contact(firstname="1", lastname="1", nickname="1", company="1", mobile="1", email="1", workphone="1",
                          secondaryphone="1", homephone="1", address="1", email2="1", email3="1")
     contact_vars.id = contact.id
-    app.contact.edit_by_index(index, contact_vars)
+    app.contact.edit_by_id(contact.id, contact_vars)
     new_contacts = db.get_contact_list()
     assert len(old_contacts) == len(new_contacts)
     old_contacts[index] = contact_vars
